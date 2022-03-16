@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import SignUp from './Components/Registration/SignUp';
-import Login from './Components/Registration/Login';
 import axios from 'axios';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import ButtonAppBar from './Components/ButtonAppBar';
 
 const style = {
   position: 'absolute',
@@ -56,9 +55,7 @@ function App() {
 
   return (
     <div className="App">
-      <div>This is a blog</div>
-      <SignUp />
-      <Login />
+      <ButtonAppBar />
       <Link to="/newPost">Create Blog Post</Link>
       { posts.map((post, index) => (
         <div key={index}>
