@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Registration from './Registration/Registration';
 
 // import SignUp from 'Registration/SignUp';
 // import Login from 'Registration/Login';
@@ -15,8 +16,7 @@ const ButtonAppBar = () => {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 No Niche
               </Typography>
-              <Typography>Login</Typography>
-              <Typography>Sign Up</Typography>
+              <Registration />
             </Toolbar>
           </AppBar>
         </Box>

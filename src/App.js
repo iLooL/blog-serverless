@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import ButtonAppBar from './Components/ButtonAppBar';
+import Container from '@mui/material/Container';
+import Stack from '@mui/material/Stack';
 
 const style = {
   position: 'absolute',
@@ -32,7 +34,8 @@ function App() {
   const getApi = async() => {
     try {
       const response = await axios.get(apiUrl);
-      setPosts(response.data.Items);
+      setPosts(response.data.Items)
+      console.log(response.data.Items)
     } catch(err) {
       console.log(err)
     } 
@@ -55,31 +58,35 @@ function App() {
 
   return (
     <div className="App">
-      <ButtonAppBar />
-      <Link to="/newPost">Create Blog Post</Link>
-      { posts.map((post, index) => (
-        <div key={index}>
-          <Link to={`blog/${index}`} key={index} state={{post}}>
-            { post.title }
-          </Link>
-            <p>{ post.author }</p>
-            <div>
-              <Button onClick={handleOpen}>Delete</Button>
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description">
-                <Box sx={style}>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>Are you sure you want to delete?</Typography>
-                  <Button name={post.id} onClick={deletePost}>
-                    Delete
-                  </Button>
-                </Box>
-              </Modal>
-            </div> 
-        </div>
-      ))}
+      <Container>
+        <ButtonAppBar />
+        <Link to="/newPost">Create Blog Post</Link>
+        <Stack>
+          { posts.map((post, index) => (
+            <Box key={index} sx={{ p:2, border: '1px solid black' }}>
+              <Link to={`blog/${index}`} key={index} state={{post}}>
+                { post.title }
+              </Link>
+                <p>{ post.author }</p>
+                <div>
+                  <Button onClick={handleOpen}>Delete</Button>
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description">
+                    <Box sx={style}>
+                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>Are you sure you want to delete?</Typography>
+                      <Button name={post.id} onClick={deletePost}>
+                        Delete
+                      </Button>
+                    </Box>
+                  </Modal>
+                </div> 
+            </Box>
+          ))}
+        </Stack>
+      </Container>
     </div>
   );
 }

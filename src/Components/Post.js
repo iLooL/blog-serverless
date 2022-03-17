@@ -10,7 +10,7 @@ const Post = () => {
       <div>
           <h1>{ post.title }</h1>
           <span>{ post.author }</span>
-          <p>{ post.content }</p>
+          <p>{ post.text }</p>
       </div>
   );
 };
