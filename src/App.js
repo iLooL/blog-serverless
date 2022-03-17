@@ -24,8 +24,10 @@ function App() {
   // api configs
   const apiUrl = 'https://aqt15rrwbl.execute-api.us-east-1.amazonaws.com/posts';
   const [posts, setPosts] = useState([]);
-
   const [open, setOpen] = useState(false);
+  const [ status, setStatus ] = useState(sessionStorage.getItem('isLogged'));
+  const [ email, setEmail ] = useState(sessionStorage.getItem('email'));
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -33,7 +35,6 @@ function App() {
     try {
       const response = await axios.get(apiUrl);
       setPosts(response.data.Items)
-      console.log(response.data.Items)
     } catch(err) {
       console.log(err)
     } 
@@ -52,11 +53,17 @@ function App() {
 
   useEffect(() => {
     getApi();
-  }, []);
+    setStatus(sessionStorage.getItem('isLogged'));
+    console.log('status: ', status);
+    if (status) {
+      // if logged in set email variable
+      setEmail(sessionStorage.getItem('email'));
+    };
+  }, [email]);
 
   return (
     <div className="App">
-      <Link to="/newPost">Create Blog Post</Link>
+      { email !==  null ? <Link to="/newPost">Create Blog Post</Link> : '' }
       <Stack>
         { posts.map((post, index) => (
           <Box key={index} sx={{ p:2, border: '1px solid black' }}>

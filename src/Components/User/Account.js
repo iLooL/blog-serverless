@@ -31,7 +31,8 @@ const Account = (props) => {
             const authDetails = new AuthenticationDetails({ Username, Password });
             user.authenticateUser(authDetails, {
                 onSuccess: data => {
-                    // console.log('onSuccess: ', data);
+                    console.log('onSuccess: ', data);
+                    sessionStorage.setItem('email', Username);
                     resolve(data);
                     navigate('/');
                 },
@@ -53,6 +54,8 @@ const Account = (props) => {
         const user = Pool.getCurrentUser();
         if (user) {
             user.signOut();
+            sessionStorage.clear();
+            navigate('/login');
         }
     };
     
