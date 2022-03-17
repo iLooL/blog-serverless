@@ -1,26 +1,58 @@
-import * as React from 'react';
+import { useState, useEffect, useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Registration from './Registration/Registration';
+import Button from '@mui/material/Button';
 
-// import SignUp from 'Registration/SignUp';
-// import Login from 'Registration/Login';
+import { useNavigate } from 'react-router-dom';
+import { AccountContext } from './User/Account';
+
 
 const ButtonAppBar = () => {
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static">
-            <Toolbar>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                No Niche
-              </Typography>
-              <Registration />
-            </Toolbar>
-          </AppBar>
-        </Box>
-      );
+  const navigate = useNavigate();
+  const [ status, setStatus ] = useState(sessionStorage.getItem('isLogged'));
+  const { logout } = useContext(AccountContext);
+
+  const loggedOut = () => {
+    logout();
+    sessionStorage.removeItem('isLogged');
+    setStatus(null);
+  }
+
+  useEffect(() => {
+    // when user logs in the URL changes and we update the appbar to match the current state
+    setStatus(sessionStorage.getItem('isLogged'));
+  }, [navigate]);
+
+  return (
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography 
+              sx={{
+                textDecoration: 'none',
+                flexGrow: '1',
+                '&:hover': {
+                  color: 'black',
+                }}} 
+              variant="h6" component="div" onClick={() => navigate('/')}
+              >
+              No Niche
+            </Typography>
+            { status ? 
+                <Button variant="outlined" color="error" onClick={() => loggedOut()}>Logout</Button>
+              :
+              <div>
+                <Button variant="outlined" color="error" onClick={() => navigate('/login')}>Login</Button>
+                <Button variant="outlined" color="error" onClick={() => navigate('/register')}>Sign Up</Button>
+              </div>
+            }
+            
+          </Toolbar>
+        </AppBar>
+      </Box>
+    );
 }
 
 export default ButtonAppBar;

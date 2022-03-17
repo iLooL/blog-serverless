@@ -2,6 +2,8 @@ import { useState } from 'react';
 import UserPool from '../User/UserPool';
 
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -17,20 +19,25 @@ const SignUp = () => {
   };
 
   return (
-  <form onSubmit={onSubmit}>
-    <div>SIGN UP</div>
-    <input
-        name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-    />
-    <input 
-        name="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-    />
-    <Button type="submit">Submit</Button>
-  </form>
+    <form onSubmit={onSubmit}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+          <div>SIGN UP</div>
+          <TextField
+              variant="outlined"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField 
+              variant="outlined"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button type="submit">Submit</Button>
+      </Box>
+    </form>
+    
   )
 };
 

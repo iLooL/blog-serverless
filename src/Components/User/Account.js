@@ -1,4 +1,4 @@
-import React, { createContext} from 'react';
+import React, { createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js"
 import Pool from './UserPool';

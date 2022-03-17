@@ -2,7 +2,8 @@ import { useState, useContext } from 'react';
 import { AccountContext } from '../User/Account';
 
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField'
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -14,27 +15,30 @@ const Login = () => {
     authenticate(email, password)
         .then((data) => {
             console.log("logged in: ", data);
+            sessionStorage.setItem('isLogged', true);
         }).catch((err) => {
             console.log("Failed logging in: ", err);
         });
   };
 
   return (
-  <form onSubmit={onSubmit}>
-      <div>LOGIN</div>
-    <TextField
-        variant="outlined"
-        name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-    />
-    <TextField 
-        variant="outlined"
-        name="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-    />
-    <Button type="submit">Log In</Button>
+    <form onSubmit={onSubmit}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+        <div>LOGIN</div>
+        <TextField
+            variant="outlined"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField 
+            variant="outlined"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button type="submit">Log In</Button>
+        </Box>
   </form>
   );
 };
