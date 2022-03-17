@@ -71,21 +71,23 @@ function App() {
               { post.title }
             </Link>
               <p>{ post.author }</p>
-              <div>
-                <Button onClick={handleOpen}>Delete</Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description">
-                  <Box sx={style}>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>Are you sure you want to delete?</Typography>
-                    <Button name={post.id} onClick={deletePost}>
-                      Delete
-                    </Button>
-                  </Box>
-                </Modal>
-              </div> 
+              { email !== null ?
+                <div>
+                  <Button onClick={handleOpen}>Delete</Button>
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description">
+                    <Box sx={style}>
+                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>Are you sure you want to delete?</Typography>
+                      <Button name={post.id} onClick={deletePost}>
+                        Delete
+                      </Button>
+                    </Box>
+                  </Modal>
+                </div> : ''
+              }
           </Box>
         ))}
       </Stack>
