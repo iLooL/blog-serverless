@@ -148,11 +148,14 @@ function App() {
                   <div className={styles.cardDetails}>
                     <CardContent>
                       <Link to={`blog/${index}`} key={index} state={{post}} style={{ textDecoration: 'none' }}>
+                        <Typography variant="subtitle1" color="textSecondary">
+                          By: { post.author }
+                        </Typography>
                         <Typography component="h2" variant="h5">
                           { post.title }
                         </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
-                          By: { post.author }
+                          Created: { post.date }
                         </Typography>
                       </Link>
                       { email !== null ?
