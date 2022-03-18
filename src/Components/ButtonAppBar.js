@@ -26,7 +26,7 @@ const ButtonAppBar = () => {
   }, [navigate]);
 
   return (
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }} mb={1}>
         <AppBar position="static">
           <Toolbar>
             <Typography 
