@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { getCurrentDate } from '../utils/Date';
+import { getCurrentDate } from '../../utils/Date';
 // import Editor from './Editor';
 
 const NewPost = () => {

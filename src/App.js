@@ -2,36 +2,21 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import Box from '@mui/material/Box';
+// MUI imports
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import Stack from '@mui/material/Stack';
-
-import { withStyles } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Divider from '@mui/material/Divider';
-import Hidden from '@mui/material/Hidden';
-// import Link from '@mui/material/Link';
 
+// helper function imports
+import { splitPosts } from './utils/PostHelper';
+import DisplayPosts from './Components/Posts/DisplayPosts';
 
-// styling for modal
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+// component imports
+import {API_URL} from './utils/api';
 
 // layout styling
 const styles = theme => ({
@@ -87,9 +72,8 @@ const styles = theme => ({
 
 function App() {
   // api configs
-  const apiUrl = 'https://aqt15rrwbl.execute-api.us-east-1.amazonaws.com/posts';
+  // const apiUrl = 'https://aqt15rrwbl.execute-api.us-east-1.amazonaws.com/posts';
   const [posts, setPosts] = useState([]);
-  const [open, setOpen] = useState({ isOpen: false, id: ''});
 
   // cognito user isLogged variables
   const [ status, setStatus ] = useState(sessionStorage.getItem('isLogged'));
@@ -98,8 +82,10 @@ function App() {
   // get all blog posts
   const getApi = async() => {
     try {
-      const response = await axios.get(apiUrl);
-      setPosts(response.data.Items)
+      const response = await axios.get(API_URL);
+      const organizedPosts = await splitPosts(response.data.Items);
+      setPosts(response.data.Items);
+      // setPosts(organizedPosts);
     } catch(err) {
       console.log(err)
     } 
@@ -108,7 +94,7 @@ function App() {
   const deletePost = async(e) => {
     const id = e.target.getAttribute('name');
     try {
-      await axios.delete(`${apiUrl}/${id}`);
+      await axios.delete(`${API_URL}/${id}`);
       getApi();
     } catch(err) {
       console.log(err);
@@ -138,70 +124,13 @@ function App() {
            </>
           : '' 
         }
-        {/* Single section for blog posts of x-tag */}
         <section>
           <Typography variant="h1" variant="h4">'Tag'</Typography>
           <Grid container spacing={2} mb={2} mt={1}>
-            { posts.map((post, index) => (
-              <Grid item key={index} xs={12} md={6}>
-                <Card className={styles.card}>
-                  <div className={styles.cardDetails}>
-                    <CardContent>
-                      <Link to={`blog/${index}`} key={index} state={{post}} style={{ textDecoration: 'none' }}>
-                        <Typography variant="subtitle1" color="textSecondary">
-                          By: { post.author }
-                        </Typography>
-                        <Typography component="h2" variant="h5">
-                          { post.title }
-                        </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
-                          Created: { post.date }
-                        </Typography>
-                      </Link>
-                      { email !== null ?
-                          <Button name={post.id} onClick={deletePost}>
-                            Delete
-                          </Button> : ''
-                      }
-                    </CardContent>
-                  </div>
-                </Card>
-              </Grid>
-            ))}
+            <DisplayPosts posts={posts} email={email} deletePost={deletePost} />
           </Grid>
           <Divider />
         </section>
-
-
-        {/* old code */}
-        {/* { email !==  null ? <Link to="/newPost">Create Blog Post</Link> : '' } */}
-        {/* <Stack>
-          { posts.map((post, index) => (
-            <Box key={index} sx={{ p:2, border: '1px solid black' }}>
-              <Link to={`blog/${index}`} key={index} state={{post}}>
-                { post.title }
-              </Link>
-                <p>{ post.author }</p>
-                { email !== null ?
-                  <div>
-                    <Button onClick={handleOpen}>Delete</Button>
-                    <Modal
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description">
-                      <Box sx={style}>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>Are you sure you want to delete?</Typography>
-                        <Button name={post.id} onClick={deletePost}>
-                          Delete
-                        </Button>
-                      </Box>
-                    </Modal>
-                  </div> : ''
-                }
-            </Box>
-          ))}
-        </Stack> */}
       </div>
     </>
   );
