@@ -1,11 +1,12 @@
-
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+
+import { PostsContext } from '../PostsContext';
 
 const styles = theme => ({
     layout: {
@@ -58,9 +59,14 @@ const styles = theme => ({
     },
   });
 
-const DisplayPosts = ({ posts, email, deletePost }) => {
+// const DisplayPosts = ({ posts, email, deletePost }) => {
+const DisplayPosts = ({ posts,email, deletePost, isLoading }) => {
+
     return (
-        posts.map((post, index) => (
+      <>
+        {
+          !isLoading ?
+          posts.map((post, index) => (
             <Grid item key={index} xs={12} md={6}>
                 <Card className={styles.card}>
                     <div className={styles.cardDetails}>
@@ -86,7 +92,40 @@ const DisplayPosts = ({ posts, email, deletePost }) => {
                 </Card>
             </Grid>
         ))
+            :
+            <div>loading</div>
+        }
+      </>
     )
+
+    // return (
+        // posts.map((post, index) => (
+        //     <Grid item key={index} xs={12} md={6}>
+        //         <Card className={styles.card}>
+        //             <div className={styles.cardDetails}>
+        //                 <CardContent>
+        //                     <Link to={`blog/${index}`} key={index} state={{post}} style={{ textDecoration: 'none' }}>
+        //                         <Typography variant="subtitle1" color="textSecondary">
+        //                             By: { post.author }
+        //                         </Typography>
+        //                         <Typography component="h2" variant="h5">
+        //                             { post.title }
+        //                         </Typography>
+        //                         <Typography variant="subtitle1" color="textSecondary">
+        //                             Created: { post.date }
+        //                         </Typography>
+        //                     </Link>
+        //                     { email !== null ?
+        //                         <Button name={post.id} onClick={deletePost}>
+        //                         Delete
+        //                         </Button> : ''
+        //                     }
+        //                 </CardContent>
+        //             </div>
+        //         </Card>
+        //     </Grid>
+        // ))
+    // )
 };
 
 export default DisplayPosts;
