@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getCurrentDate } from '../../utils/Date';
+import { fetchAllPosts, createPost } from '../../utils/api';
+import { useApi } from '../PostsContext';
 // import Editor from './Editor';
 
 const NewPost = () => {
-  const apiUrl = 'https://aqt15rrwbl.execute-api.us-east-1.amazonaws.com/posts';
   const [form, setForm] = useState({
     author: 'adam',
     date: getCurrentDate(),
@@ -15,12 +16,16 @@ const NewPost = () => {
   });
   
   const navigate = useNavigate();
+  const { setPosts } = useApi();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(form);
-    await axios.put(apiUrl, form);
-    console.log(form);
+    await createPost(form).then(() =>{
+      fetchAllPosts().then((res) => {
+          setPosts(res);
+      });
+    });
+    // await axios.put(API_URL, form);
     navigate('/');
   }
 

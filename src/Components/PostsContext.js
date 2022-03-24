@@ -1,26 +1,26 @@
 import { useContext, createContext, useState, useEffect } from 'react';
-import { getApi } from '../utils/api';
+import { fetchAllPosts } from '../utils/api';
 
 const PostsContext = createContext();
 
 const PostsProvider = (props) => {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState(null);
+  const [tag, setTag] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  
   const getPostsData = async() => {
-    const postsData = await getApi();
+    const postsData = await fetchAllPosts();
     setPosts(postsData);
     setIsLoading(false);
   }
 
   useEffect(() => {
     getPostsData();
-
-    // setPosts(data);
+    console.log('updated posts');
   }, []);
 
   return (
-    <PostsContext.Provider value={{ posts, setPosts, isLoading }}>
+    <PostsContext.Provider value={{ posts, setPosts, isLoading, tag, setTag }}>
       { props.children }
     </PostsContext.Provider>
   )
