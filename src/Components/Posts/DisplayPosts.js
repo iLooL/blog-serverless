@@ -5,9 +5,10 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
-import { styles } from './PostStyles';
 // delete single post based on id
 import { deletePost, fetchAllPosts } from '../../utils/api';
+
+import { cardStyles } from './styles';
 
 const DisplayPosts = ({ posts, setPosts, email, isLoading }) => {
 
@@ -22,12 +23,12 @@ const DisplayPosts = ({ posts, setPosts, email, isLoading }) => {
 
     return (
       <>
+      <Grid container spacing={2}>
         {
           !isLoading ?
           posts.map((post, index) => (
-            <Grid item key={index} xs={12} md={6}>
-                <Card className={styles.card}>
-                    <div className={styles.cardDetails}>
+            <Grid item key={index} xs={12} md={6} spacing={4}>
+                <Card sx={cardStyles}>
                         <CardContent>
                             <Link to={`blog/${index}`} key={index} state={{post}} style={{ textDecoration: 'none' }}>
                                 <Typography variant="subtitle1" color="textSecondary">
@@ -46,13 +47,13 @@ const DisplayPosts = ({ posts, setPosts, email, isLoading }) => {
                                 </Button> : ''
                             }
                         </CardContent>
-                    </div>
                 </Card>
             </Grid>
         ))
             :
             <div>Loading Posts...</div>
         }
+        </Grid>
       </>
     )
 };

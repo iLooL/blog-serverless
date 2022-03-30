@@ -10,8 +10,7 @@ import SignUp from './Components/Registration/SignUp';
 import Login from './Components/Registration/Login';
 import Home from './Components/Home';
 
-import { styles } from './Components/Posts/PostStyles';
-
+// import { styles } from './Components/Posts/PostStyles';
 
 const App = () => {
 
@@ -20,7 +19,7 @@ const App = () => {
             <Account>
                 <PostsProvider>
                     <CssBaseline />
-                    <div className={"App " + styles.layout}>
+                    <div>
                         <ButtonAppBar />
                         <Routes>
                             <Route path="/" element={ <Home /> } />

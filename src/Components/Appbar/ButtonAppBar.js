@@ -31,12 +31,12 @@ const ButtonAppBar = () => {
 
   return (
       <Box sx={{ flexGrow: 1 }} mb={1}>
-        <AppBar position="static">
+        <AppBar position="static" sx={{ background: '#2E3B55' }}>
           <Toolbar>
             <Typography 
               sx={{
                 textDecoration: 'none',
-                flexGrow: '1',
+                flexGrow: 1,
                 '&:hover': {
                   color: 'white',
                 }}} 
@@ -46,12 +46,12 @@ const ButtonAppBar = () => {
             </Typography>
             <SearchField />
             { status ? 
-                <Button variant="outlined" color="error" onClick={() => loggedOut()}>Logout</Button>
+                <Button variant="outlined" sx={{ mx: 2,  }} onClick={() => loggedOut()}>Logout</Button>
               :
-              <div>
-                <Button variant="outlined" color="error" onClick={() => navigate('/login')}>Login</Button>
-                <Button variant="outlined" color="error" onClick={() => navigate('/register')}>Sign Up</Button>
-              </div>
+              <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-evenly' }} mx={2}>
+                <Button variant="outlined" onClick={() => navigate('/login')}>Login</Button>
+                <Button variant="outlined" onClick={() => navigate('/register')}>Sign Up</Button>
+              </Box>
             }
             
           </Toolbar>

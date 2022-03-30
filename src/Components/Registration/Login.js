@@ -2,8 +2,10 @@ import { useState, useContext } from 'react';
 import { AccountContext } from '../User/Account';
 
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import { textFieldStyles, registrationContainer } from './styles';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -23,23 +25,28 @@ const Login = () => {
 
   return (
     <form onSubmit={onSubmit}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
-        <div>LOGIN</div>
-        <TextField
-            variant="outlined"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField 
-            variant="outlined"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button type="submit">Log In</Button>
+        <Box sx={registrationContainer}>
+            <Typography variant="h5">Login</Typography>
+            <TextField
+                variant="outlined"
+                name="email"
+                label="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                sx={textFieldStyles}
+            />
+            <TextField 
+                variant="outlined"
+                name="password"
+                label="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                sx={textFieldStyles}
+            />
+            <Button variant="outlined" type="submit">Log In</Button>
         </Box>
-  </form>
+    </form> 
   );
 };
 

@@ -4,7 +4,19 @@ import axios from 'axios';
 import { getCurrentDate } from '../../utils/Date';
 import { fetchAllPosts, createPost } from '../../utils/api';
 import { useApi } from '../PostsContext';
-// import Editor from './Editor';
+
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
+const textFieldStyles = {
+  mx: 2,
+  my: 2,
+  rows: 2,
+  width: ["70%", "30%"]
+}
 
 const NewPost = () => {
   const [form, setForm] = useState({
@@ -19,6 +31,7 @@ const NewPost = () => {
   const { setPosts } = useApi();
 
   const handleSubmit = async(e) => {
+    console.log(form);
     e.preventDefault();
     await createPost(form).then(() =>{
       fetchAllPosts().then((res) => {
@@ -33,19 +46,45 @@ const NewPost = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
+
   return (
-      <div>
-          <h1>Create a new blog post</h1>
-          <form onSubmit={handleSubmit}>
-            <label>Title</label>
-            <input name="title" type="text" onChange={handleChange} />
-            <label>Blog Text</label>
-            <input name="text" type="text" onChange={handleChange} />
-            <label>Add a Single Tag</label>
-            <input name="tag" type="text" onChange={handleChange} />
-            <input type="submit" name="Submit" />
-          </form>
-      </div>
+
+
+    <form onSubmit={handleSubmit}>
+      <Box sx={{
+        display: 'flex', 
+        height: "80vh",
+        flexDirection: 'column', 
+        // alignItems: 'center',
+      }}>
+        <Typography variant="h5">Create a new blog post</Typography>
+          <TextField
+            variant="outlined"
+            name="title"
+            label="Blog Title"
+            onChange={handleChange}
+            sx={textFieldStyles}
+          />
+          <TextField
+            variant="outlined"
+            name="text"
+            label="Blog Post Body"
+            onChange={handleChange}
+            multiline="true"
+            rows={8}
+            rowsMax={"infinity"}
+            />
+          <TextField
+            variant="outlined"
+            name="tag"
+            label="Tags"
+            onChange={handleChange}
+            sx={textFieldStyles}
+          />
+          <Button variant="outlined" type="submit" sx={{ width: "30%", ml: 2, width: ["70%", "30%"] }}>Publish Post</Button>
+      </Box>
+    </form>
+
   );
 };
 

@@ -35,7 +35,11 @@ const SearchField = () => {
 
     return (
         <>
-            <TextField onChange={(e) => setTagFilter(e.target.value)} onKeyDown={handleKeyDown} />
+            <TextField 
+                placeholder="Enter a tag..." 
+                size="small" sx={{ flexGrow: 5, background: "white" }} 
+                onChange={(e) => setTagFilter(e.target.value)} onKeyDown={handleKeyDown} 
+            />
         </>
     )
 }

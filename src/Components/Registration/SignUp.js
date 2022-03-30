@@ -2,8 +2,10 @@ import { useState } from 'react';
 import UserPool from '../User/UserPool';
 
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import { textFieldStyles, registrationContainer } from './styles';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -20,21 +22,26 @@ const SignUp = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
-          <div>SIGN UP</div>
+      <Box sx={registrationContainer}>
+          <Typography variant="h5">Sign Up</Typography>
           <TextField
               variant="outlined"
+              label="Email"
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              sx={textFieldStyles}
           />
           <TextField 
               variant="outlined"
               name="password"
+              label="Password"
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              sx={textFieldStyles}
           />
-          <Button type="submit">Submit</Button>
+          <Button variant="outlined" type="submit">Submit</Button>
       </Box>
     </form>
     
