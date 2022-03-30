@@ -46,7 +46,10 @@ const ButtonAppBar = () => {
             </Typography>
             <SearchField />
             { status ? 
-                <Button variant="outlined" sx={{ mx: 2,  }} onClick={() => loggedOut()}>Logout</Button>
+              <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-evenly' }} mx={2}>
+                  <Button variant="outlined" onClick={() => loggedOut()}>Logout</Button>
+                  <Button variant="outlined" onClick={() => navigate('/account')}>Account</Button>
+              </Box>
               :
               <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-evenly' }} mx={2}>
                 <Button variant="outlined" onClick={() => navigate('/login')}>Login</Button>

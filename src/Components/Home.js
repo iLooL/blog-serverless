@@ -24,9 +24,9 @@ const Home = () => {
         }}>
             {
                 tag !== null ? 
-                <Typography variant="h3">Displaying {tag} posts</Typography> 
+                <Typography variant="h2">Displaying {tag} posts</Typography> 
                 : 
-                <Typography variant="h3">Displaying all posts</Typography>
+                <Typography variant="h2">Displaying all posts</Typography>
             }
 
         </Box>

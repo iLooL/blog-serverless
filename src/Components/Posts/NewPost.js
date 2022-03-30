@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { getCurrentDate } from '../../utils/Date';
 import { fetchAllPosts, createPost } from '../../utils/api';
 import { useApi } from '../PostsContext';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
@@ -81,7 +79,7 @@ const NewPost = () => {
             onChange={handleChange}
             sx={textFieldStyles}
           />
-          <Button variant="outlined" type="submit" sx={{ width: "30%", ml: 2, width: ["70%", "30%"] }}>Publish Post</Button>
+          <Button variant="outlined" type="submit" sx={{ ml: 2, width: ["70%", "30%"] }}>Publish Post</Button>
       </Box>
     </form>
 

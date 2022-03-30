@@ -16,10 +16,10 @@ const Login = () => {
     e.preventDefault();
     authenticate(email, password)
         .then((data) => {
-            console.log("logged in: ", data);
             sessionStorage.setItem('isLogged', true);
         }).catch((err) => {
             console.log("Failed logging in: ", err);
+            alert(err);
         });
   };
 

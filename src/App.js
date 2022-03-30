@@ -8,6 +8,7 @@ import NewPost from './Components/Posts/NewPost';
 import ViewPost from './Components/Posts/ViewPost';
 import SignUp from './Components/Registration/SignUp';
 import Login from './Components/Registration/Login';
+import AccountView from './Components/User/AccountView';
 import Home from './Components/Home';
 
 // import { styles } from './Components/Posts/PostStyles';
@@ -27,10 +28,11 @@ const App = () => {
                             <Route path="/blog/:postId" element={ <ViewPost /> } />
                             <Route path="/login" element={ <Login /> } />
                             <Route path="/register" element={ <SignUp /> } />
+                            <Route path="/account" element={ <AccountView /> } />
                         </Routes>
                     </div>
                 </PostsProvider>
-            </Account >
+            </Account>
         </BrowserRouter>
     )
 }

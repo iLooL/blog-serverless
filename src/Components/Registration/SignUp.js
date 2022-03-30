@@ -15,7 +15,10 @@ const SignUp = () => {
     e.preventDefault();
     console.log(email, password);
     UserPool.signUp(email, password, [], null, (err, data) => {
-      if (err) console.error(err);
+      if (err) {
+        console.error(err);
+        alert(err);
+      };
       console.log(data);
     });
   };

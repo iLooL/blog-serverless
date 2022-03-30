@@ -52,6 +52,7 @@ const Account = (props) => {
 
     const logout = () => {
         const user = Pool.getCurrentUser();
+        console.log(user);
         if (user) {
             user.signOut();
             sessionStorage.clear();

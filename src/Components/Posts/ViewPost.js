@@ -4,18 +4,33 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 
+const containerStyles = {
+    // background: 'teal',
+
+}
+
+const postBody = {
+    // background: 'blue',
+    fontSize: ["16px", "24px"],
+    lineSpacing: "2rem",
+    width: ["90%", "70%"],
+    mx: "auto",
+    mt: 3
+
+}
+
 const Post = () => {
 
     const location = useLocation();
     const { post } = location.state;
     console.log(post);
   return (
-      <Box>
+      <Box sx={containerStyles}>
             <Typography variant="h1">{ post.title }</Typography>
             <Box component="span">Posted By: { post.author }</Box>
             <Typography>{ post.date }</Typography>
             <Divider />
-            <Typography variant="body2">
+            <Typography sx={postBody} variant="body2">
                 { post.text }
             </Typography>
       </Box>
