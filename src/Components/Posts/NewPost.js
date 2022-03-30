@@ -4,6 +4,9 @@ import { getCurrentDate } from '../../utils/Date';
 import { fetchAllPosts, createPost } from '../../utils/api';
 import { useApi } from '../PostsContext';
 
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -36,12 +39,17 @@ const NewPost = () => {
           setPosts(res);
       });
     });
-    // await axios.put(API_URL, form);
     navigate('/');
   }
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    console.log(form);
+  }
+
+  const handleTextChange = (e) => {
+    setForm({ ...form, "text": e});
+    console.log(form);
   }
 
 
@@ -63,7 +71,7 @@ const NewPost = () => {
             onChange={handleChange}
             sx={textFieldStyles}
           />
-          <TextField
+          {/* <TextField
             variant="outlined"
             name="text"
             label="Blog Post Body"
@@ -71,7 +79,8 @@ const NewPost = () => {
             multiline="true"
             rows={8}
             rowsMax={"infinity"}
-            />
+            /> */}
+            <ReactQuill theme="snow" name="text" onChange={handleTextChange}/>
           <TextField
             variant="outlined"
             name="tag"

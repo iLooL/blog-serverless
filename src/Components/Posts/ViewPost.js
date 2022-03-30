@@ -30,8 +30,7 @@ const Post = () => {
             <Box component="span">Posted By: { post.author }</Box>
             <Typography>{ post.date }</Typography>
             <Divider />
-            <Typography sx={postBody} variant="body2">
-                { post.text }
+            <Typography sx={postBody} variant="body2" dangerouslySetInnerHTML={{__html: post.text}}>
             </Typography>
       </Box>
   );
