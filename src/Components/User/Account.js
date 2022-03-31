@@ -33,6 +33,8 @@ const Account = (props) => {
                 onSuccess: data => {
                     console.log('onSuccess: ', data);
                     sessionStorage.setItem('email', Username);
+                    sessionStorage.setItem('name', data.idToken.payload.name);
+                    console.log(data.idToken.payload.name);
                     resolve(data);
                     navigate('/');
                 },
@@ -59,9 +61,14 @@ const Account = (props) => {
             navigate('/login');
         }
     };
+
+    const getUsername = () => {
+        const user = Pool.getCurrentUser();
+        console.log(user);
+    }
     
     return (
-        <AccountContext.Provider value={{ authenticate, getSession, logout }}>
+        <AccountContext.Provider value={{ authenticate, getSession, logout, getUsername }}>
             {props.children}
         </AccountContext.Provider>
     )

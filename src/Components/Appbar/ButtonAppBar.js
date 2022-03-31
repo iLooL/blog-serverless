@@ -48,7 +48,7 @@ const ButtonAppBar = () => {
             { status ? 
               <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-evenly' }} mx={2}>
                   <Button variant="outlined" onClick={() => loggedOut()}>Logout</Button>
-                  <Button variant="outlined" onClick={() => navigate('/account')}>Account</Button>
+                  {/* <Button variant="outlined" onClick={() => navigate('/account')}>Account</Button> */}
               </Box>
               :
               <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-evenly' }} mx={2}>

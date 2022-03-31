@@ -4,13 +4,13 @@ import { useState, useContext } from 'react';
 import TextField from '@mui/material/TextField';
 
 // local imports
-import { fetchFilteredPosts, fetchAllPosts } from '../../utils/api';
+import { fetchFilteredPosts } from '../../utils/api';
 import { PostsContext } from '../PostsContext';
 
 const SearchField = () => {
 
     const [ tagFilter, setTagFilter ] = useState('');
-    const { posts, setPosts, setTag } = useContext(PostsContext);
+    const { setPosts, setTag } = useContext(PostsContext);
 
     const getFilteredPosts = async(tagFilter) => {
         await fetchFilteredPosts(tagFilter).then((filteredPosts) => {

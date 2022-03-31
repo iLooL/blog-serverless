@@ -7,4 +7,9 @@ const getCurrentDate = () => {
     return `${year}-${month<10?`0${month}`:`${month}`}-${date}`
 }
 
-export { getCurrentDate };
+const sortByDate = (posts) => {
+    // sort date by descending order
+    return posts.sort((a, b) => (a.date > b.date) ? -1 : 1);;
+}
+
+export { getCurrentDate, sortByDate };

@@ -21,3 +21,7 @@ After getting my AWS CCP I had great enthusiasim to learn how a full stack
 - S3
 - DynamoDB
 - Cognito
+
+## App Architecture
+
+<img src="./app_architecture.png" alt="App Architecture">

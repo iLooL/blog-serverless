@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
+
+// local imports 
 import { useNavigate } from 'react-router-dom';
 import { getCurrentDate } from '../../utils/Date';
 import { fetchAllPosts, createPost } from '../../utils/api';
 import { useApi } from '../PostsContext';
 
+// 3rd party imports
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+
 
 const textFieldStyles = {
   mx: 2,
@@ -20,8 +23,10 @@ const textFieldStyles = {
 }
 
 const NewPost = () => {
+  const name = sessionStorage.getItem('name') === undefined ? sessionStorage.getItem('name') : "Anonymous";
   const [form, setForm] = useState({
-    author: 'adam',
+    author: name,
+    email: sessionStorage.getItem('email'), 
     date: getCurrentDate(),
     title: '',
     text: '',
@@ -44,12 +49,10 @@ const NewPost = () => {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    console.log(form);
   }
 
   const handleTextChange = (e) => {
     setForm({ ...form, "text": e});
-    console.log(form);
   }
 
 
@@ -71,16 +74,9 @@ const NewPost = () => {
             onChange={handleChange}
             sx={textFieldStyles}
           />
-          {/* <TextField
-            variant="outlined"
-            name="text"
-            label="Blog Post Body"
-            onChange={handleChange}
-            multiline="true"
-            rows={8}
-            rowsMax={"infinity"}
-            /> */}
-            <ReactQuill theme="snow" name="text" onChange={handleTextChange}/>
+          <Box>
+            <ReactQuill theme="snow" name="text" onChange={handleTextChange} />
+          </Box>
           <TextField
             variant="outlined"
             name="tag"

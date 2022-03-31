@@ -1,5 +1,6 @@
 import { useContext, createContext, useState, useEffect } from 'react';
 import { fetchAllPosts } from '../utils/api';
+import { sortByDate } from '../utils/Date';
 
 const PostsContext = createContext();
 
@@ -10,7 +11,7 @@ const PostsProvider = (props) => {
   
   const getPostsData = async() => {
     const postsData = await fetchAllPosts();
-    setPosts(postsData);
+    setPosts(sortByDate(postsData));
     setIsLoading(false);
   }
 

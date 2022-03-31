@@ -6,15 +6,21 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { textFieldStyles, registrationContainer } from './styles';
+import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(email, password);
-    UserPool.signUp(email, password, [], null, (err, data) => {
+    let nameAttrib = new CognitoUserAttribute({
+      Name: 'name',
+      Value: name
+    });
+    UserPool.signUp(email, password, [nameAttrib], null, (err, data) => {
       if (err) {
         console.error(err);
         alert(err);
@@ -27,6 +33,14 @@ const SignUp = () => {
     <form onSubmit={onSubmit}>
       <Box sx={registrationContainer}>
           <Typography variant="h5">Sign Up</Typography>
+          <TextField
+              variant="outlined"
+              label="Name"
+              name="email"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              sx={textFieldStyles}
+          />
           <TextField
               variant="outlined"
               label="Email"

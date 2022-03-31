@@ -12,6 +12,7 @@ import { cardStyles } from './styles';
 
 const DisplayPosts = ({ posts, setPosts, email, isLoading }) => {
 
+    console.log(email)
     const deletePostAndUpdate = async(e) => {
         const id = e.target.getAttribute('name');
         await deletePost(id).then(() => {
@@ -40,8 +41,12 @@ const DisplayPosts = ({ posts, setPosts, email, isLoading }) => {
                                 <Typography variant="subtitle1" color="textSecondary">
                                     Created: { post.date }
                                 </Typography>
+                                <Typography variant="subtitle1" color="textSecondary">
+                                    Tag: { post.tag }
+                                </Typography>
                             </Link>
-                            { email !== null ?
+                            { console.log(post)}
+                            { email === post.email ?
                                 <Button name={post.id} onClick={deletePostAndUpdate}>
                                 Delete
                                 </Button> : ''
