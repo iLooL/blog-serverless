@@ -5,7 +5,6 @@ After getting my AWS CCP I had great enthusiasim to learn how a full stack
  AWS services to build out a serverless blog application.
  
  ## Tech Stack
- ---
 
  ### Frontend
 
