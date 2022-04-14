@@ -34,7 +34,7 @@ const Account = (props) => {
                     console.log('onSuccess: ', data);
                     sessionStorage.setItem('email', Username);
                     sessionStorage.setItem('name', data.idToken.payload.name);
-                    console.log(data.idToken.payload.name);
+                    // console.log(data.idToken.payload.name);
                     resolve(data);
                     navigate('/');
                 },

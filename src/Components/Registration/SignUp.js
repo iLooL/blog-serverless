@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserPool from '../User/UserPool';
 
 import Button from '@mui/material/Button';
@@ -12,6 +13,7 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -20,12 +22,15 @@ const SignUp = () => {
       Name: 'name',
       Value: name
     });
+    console.log(nameAttrib);
     UserPool.signUp(email, password, [nameAttrib], null, (err, data) => {
       if (err) {
         console.error(err);
         alert(err);
-      };
-      console.log(data);
+      } else {
+        console.log(data);
+        navigate('/login');
+      }
     });
   };
 

@@ -23,7 +23,8 @@ const textFieldStyles = {
 }
 
 const NewPost = () => {
-  const name = sessionStorage.getItem('name') === undefined ? sessionStorage.getItem('name') : "Anonymous";
+  const name = sessionStorage.getItem('name') === undefined ? "Anonymous" : sessionStorage.getItem('name');
+  console.log(name);
   const [form, setForm] = useState({
     author: name,
     email: sessionStorage.getItem('email'), 
