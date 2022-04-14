@@ -3,6 +3,8 @@
 After getting my AWS CCP I had great enthusiasim to learn how a full stack
  web application functioned on the cloud. In this project I used various common
  AWS services to build out a serverless blog application.
+
+ http://serverless-blog-app1.s3-website-us-east-1.amazonaws.com/
  
  ## Tech Stack
 
@@ -24,7 +26,3 @@ After getting my AWS CCP I had great enthusiasim to learn how a full stack
 ## App Architecture
 
 <img src="./app_architecture.png" alt="App Architecture">
-
-### Website Link
-
-http://serverless-blog-app1.s3-website-us-east-1.amazonaws.com/
